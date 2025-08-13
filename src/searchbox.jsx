@@ -25,7 +25,7 @@ export default function Search({setLocationData,LocationData}){
  
   let geoLOCATION = async(city) =>{
     let url = "http://api.openweathermap.org/geo/1.0/direct";
-    let api_key = "7a93953678ab250321d5263d8096b245";
+    let api_key = import.meta.env.VITE_API_KEY;
     try {
         const response = await fetch(`${url}?q=${city}&limit=1&appid=${api_key}`);
         const jsonResponse = await response.json();
