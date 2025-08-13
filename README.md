@@ -31,7 +31,7 @@ A beginner-friendly **React app** that allows users to search for any city and v
 
 1.  Clone the repository:  
    ```bash
-     git clone (https://github.com/ARYANCY/REACT-WEATHER-APP.git)
+     git clone https://github.com/ARYANCY/REACT-WEATHER-APP.git
    ```
 
 2. Navigate into the project directory:
