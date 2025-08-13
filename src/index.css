@@ -1,0 +1,163 @@
+:root {
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  height: 100%;
+  color-scheme: light dark;
+  color: #ffffff;
+  background-color: #87c9e2;
+  display: block;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1b1b3b 10%, #000000 90%);
+  padding: 2rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+a {
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+a:hover {
+  color: #aecbfa;
+  text-shadow: 0 0 6px #8ab4f8;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 3.4rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #7ee8fa, #eec0c6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+button {
+  border-radius: 14px;
+  border: none;
+  padding: 0.75em 2em;
+  font-size: 1.1rem;
+  font-weight: 900;
+  font-family: inherit;
+  background: linear-gradient(135deg, #dbe0e7 0%, #5a75f3 100%);
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 18px rgba(138, 180, 248, 0.4);
+}
+button:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: linear-gradient(135deg, #a3c4fd 0%, #6c87ff 100%);
+  box-shadow: 0 10px 25px rgba(138, 180, 248, 0.6);
+}
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.6);
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  padding: 0.8em 1.2em;
+  border: none;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem 0;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+input:focus {
+  background-color: #ffffff;
+  outline: 2px solid #8ab4f8;
+}
+
+.card {
+  background: #151515;
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.015);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #111;
+    background-color: #fafafa;
+  }
+
+  body {
+    background: linear-gradient(135deg, #ffffff, #f0f4ff);
+    color: #ffffff;
+  }
+
+  a {
+    color: #000000;
+  }
+  a:hover {
+    color: #000000;
+    text-shadow: none;
+  }
+
+  h1 {
+    background: linear-gradient(90deg, #3b82f6, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  button {
+    background: linear-gradient(135deg, #3b82f6 0%, #5153b7 100%);
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+  button:hover {
+    background: linear-gradient(135deg, #60a5fa 0%, #818cf8 100%);
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
+    background-color: #fff;
+    color: #ffffff;
+    border: 1px solid #ddd;
+  }
+  input:focus {
+    background-color: #f0f4ff;
+    outline: 2px solid #608dd4;
+  }
+
+  .card {
+    background: #ffffff;
+    color: #1a1a1a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+}
