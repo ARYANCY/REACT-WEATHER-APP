@@ -1,6 +1,9 @@
 # 🌤️ Weather Info App
 
 A beginner-friendly **React app** that allows users to search for any city and view real-time weather information with dynamic visuals.
+
+---
+
  **Live Demo:** [weatherapplication-react-first.netlify.app](https://weatherapplication-react-first.netlify.app)
 ---
 
