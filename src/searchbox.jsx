@@ -1,67 +1,92 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
-
 import { useState } from "react";
-export default function Search({setLocationData,LocationData}){
-  let [city,setcity] = useState("");
-  
-  let handlesubmit = async(event) =>{
-    event.preventDefault();
-    if (city.trim() !== "") {
-      await geoLOCATION(city);
-      setcity("");
-    }
-  }
-  let handleChange = (event) => {
-    setcity(event.target.value);
-  }
- 
-  let geoLOCATION = async(city) =>{
-    let url = "https://api.openweathermap.org/geo/1.0/direct";
-    let api_key = import.meta.env.VITE_API_KEY;
-    try {
-        const response = await fetch(`${url}?q=${city}&limit=1&appid=${api_key}`);
-        const jsonResponse = await response.json();
 
-        if (jsonResponse.length > 0) {
-          const { name, lat, lon } = jsonResponse[0];
-          setLocationData({ name, lat, lon });
-        } else {
-          alert("Location not found.");
-        }
-    } catch (e) {
-        alert("Error in searching location.");
+export default function Search({ setLocationData, recentSearches = [], favoriteLocations = [] }) {
+  const [query, setQuery] = useState("");
+
+  const searchLocation = async (name) => {
+    try {
+      const apiKey = import.meta.env.VITE_API_KEY;
+      const response = await fetch(
+        `https://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=1&appid=${apiKey}`
+      );
+      const data = await response.json();
+      if (data && data.length > 0) {
+        const location = {
+          name: data[0].name,
+          lat: data[0].lat,
+          lon: data[0].lon
+        };
+        setLocationData(location);
+        setQuery(""); 
+      } else {
+        alert("Location not found");
+      }
+    } catch (err) {
+      alert("Error searching location");
     }
   };
 
-  
-  return(
-    <>
-      <div>
-        <Box sx={{ minWidth: 275,padding:10}}>
-          <Card variant="outlined">
-              <CardContent>
-                <form onSubmit={handlesubmit}>
-                  <h3 style={{color:'black'}}>SEARCH FOR CITY</h3>
-                  <TextField id="outlined-basic" style={{marginBottom:'10px',width:345}} value={city} onChange={handleChange} label="CITY NAME?" variant="outlined" />
-                  <br></br>
-                  <Button style={{color:'black'}} variant="outlined"type="submit"  >SEARCH</Button>
-                  <br/>
-                </form> 
-              </CardContent>
-          </Card>
-        </Box>
-      </div>
-      
-      
-      
-    </>
-  )
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (query.trim() !== "") searchLocation(query.trim());
+  };
+
+  return (
+    <div style={{ marginBottom: "2rem", textAlign: "center" }}>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search location..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          style={{ padding: "0.75em 1em", borderRadius: "12px", width: "250px", marginRight: "0.5rem" }}
+        />
+        <button type="submit" style={{ padding: "0.75em 1.5em", borderRadius: "12px", cursor: "pointer" }}>
+          Search
+        </button>
+      </form>
+
+      {favoriteLocations.length > 0 && (
+        <div style={{ marginTop: "1rem" }}>
+          <strong>⭐ Favorites:</strong>
+          {favoriteLocations.map((loc) => (
+            <button
+              key={loc.name}
+              onClick={() => setLocationData(loc)}
+              style={{
+                margin: "0.25rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "10px",
+                cursor: "pointer",
+                background: "#ffe066"
+              }}
+            >
+              {loc.name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {recentSearches.length > 0 && (
+        <div style={{ marginTop: "1rem" }}>
+          <strong>🕑 Recent Searches:</strong>
+          {recentSearches.map((loc) => (
+            <button
+              key={loc.name}
+              onClick={() => setLocationData(loc)}
+              style={{
+                margin: "0.25rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "10px",
+                cursor: "pointer",
+                background: "#a3cef1"
+              }}
+            >
+              {loc.name}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
